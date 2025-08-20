@@ -1,0 +1,108 @@
+instructions:
+  # Set
+  - name: setb
+    parameters: [ des_r8, a_v8 ]
+    description: "Set 8-bit value 'a' to 8-bit register 'des'."
+
+  - name: setw
+    parameters: [ des_r16, a_v16 ]
+    description: "Set 16-bit value 'a' to 16-bit register 'des'."
+  
+  - name: setl
+    parameters: [ des_r32, a_v32 ]
+    description: "Set 32-bit value 'a' to 32-bit register 'des'."
+  
+  # Copy
+  - name: cpb
+    parameters: [ des_r8, reg_r8 ]
+    description: "Copy 8-bit register 'reg' to 8-bit register 'des'."
+
+  - name: cpw
+    parameters: [ des_r16, reg_r16 ]
+    description: "Copy 16-bit register 'reg' to 16-bit register 'des'."
+
+  - name: cpl
+    parameters: [ des_r32, reg_r32 ]
+    description: "Copy 32-bit register 'reg' to 32-bit register 'des'."
+
+  # Load from VMU
+  - name: loadb
+    parameters: [ des_r8, addr_v8 ]
+    description: "Load 8-bit value from VMU address to 8-bit register 'des'."
+  
+  - name: loadw
+    parameters: [ des_r16, addr_v16 ]
+    description: "Load 16-bit value from VMU address to 16-bit register 'des'."
+  
+  - name: loadl
+    parameters: [ des_r32, addr_v32 ]
+    description: "Load 32-bit value from VMU address to 32-bit register 'des'."
+
+  # Store to VMU
+  - name: storeb
+    parameters: [ addr_v8, reg_r8 ]
+    description: "Store 8-bit value from 8-bit register 'src' to VMU address."
+  
+  - name: storew
+    parameters: [ addr_v16, reg_r16 ]
+    description: "Store 16-bit value from 16-bit register 'src' to VMU address."
+  
+  - name: storel
+    parameters: [ addr_v32, reg_r32 ]
+    description: "Store 32-bit value from 32-bit register 'src' to VMU address."
+
+  # Bitwise operations
+  
+  ## Bitwise NOT
+  - name: notb
+    parameters: [ des_r8 ]
+    description: "Bitwise NOT on 8-bit register 'des'."
+  
+  - name: notw
+    parameters: [ des_r16 ]
+    description: "Bitwise NOT on 16-bit register 'des'."
+  
+  - name: notl
+    parameters: [ des_r32 ]
+    description: "Bitwise NOT on 32-bit register 'des'."
+
+  ## Bitwise AND
+  - name: andb
+    parameters: [ des_r8, a_r8, b_r8 ]
+    description: "Bitwise AND between 8-bit registers 'a' and 'b' to 8-bit register 'des'."
+
+  - name: andw
+    parameters: [ des_r16, a_r16, b_r16 ]
+    description: "Bitwise AND between 16-bit registers 'a' and 'b' to 16-bit register 'des'."
+
+  - name: andl
+    parameters: [ des_r32, a_r32, b_r32 ]
+    description: "Bitwise AND between 32-bit registers 'a' and 'b' to 32-bit register 'des'."
+  
+  ## Bitwise OR
+  - name: orb
+    parameters: [ des_r8, a_r8, b_r8 ]
+    description: "Bitwise OR between 8-bit registers 'a' and 'b' to 8-bit register 'des'."
+  
+  - name: orw
+    parameters: [ des_r16, a_r16, b_r16 ]
+    description: "Bitwise OR between 16-bit registers 'a' and 'b' to 16-bit register 'des'."
+  
+  - name: orl
+    description: "Bitwise OR between 32-bit registers 'a' and 'b' to 32-bit register 'des'."
+  
+  ## Bitwise XOR
+  - name: xorb
+    parameters: [ des_r8, a_r8, b_r8 ]
+    description: "Bitwise XOR between 8-bit registers 'a' and 'b' to 8-bit register 'des'."
+  
+  - name: xorw
+    parameters: [ des_r16, a_r16, b_r16 ]
+    description: "Bitwise XOR between 16-bit registers 'a' and 'b' to 16-bit register 'des'."
+  
+  - name: xorl
+    parameters: [ des_r32, a_r32, b_r32 ]
+    description: "Bitwise XOR between 32-bit registers 'a' and 'b' to 32-bit register 'des'."
+
+  
+  # Logical operations
