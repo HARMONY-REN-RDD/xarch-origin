@@ -1,22 +1,37 @@
-PROJECT_NAME := x32
+PROJECT_NAME := xarch-origin-x32_linux.xwm
+BUILD_DIR := build
 SRC_DIR := src
 INCLUDE_DIR := include
-BUILD_DIR := build
+OBJ_DIR := $(BUILD_DIR)/obj
 
-SRC := $(shell find $(SRC_DIR) -type f -name '*.cpp')
-INCLUDE := $(shell find $(INCLUDE_DIR) -type f -name '*.hpp')
+TARGET := $(BUILD_DIR)/$(PROJECT_NAME)
 
-LINUX_BUILD_DIR := $(BUILD_DIR)/linux
-WINDOWS_BUILD_DIR := $(BUILD_DIR)/windows
+CXX ?= g++
+CXX_FLAGS ?= -std=c++20 -Wall -I$(INCLUDE_DIR) -fPIC
+LD_FLAGS :=
 
-LINUX_OBJ := $(patsubst $(SRC_DIR)/%.cpp, $(LINUX_BUILD_DIR)/%.o, $(SRC))
-WINDOWS_OBJ := $(patsubst $(SRC_DIR)/%.cpp, $(WINDOWS_BUILD_DIR)/%.o, $(SRC))
+SRC := $(shell find $(SRC_DIR) -type f -name "*.cpp")
+INCLUDE := $(shell find $(INCLUDE_DIR) -type f -name "*.cpp")
+OBJ := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
+all: $(TARGET)
 
-.PHONY: all linux windows clean
+$(TARGET): $(OBJ) | $(BUILD_DIR)
+	$(CXX) -shared $(CXX_FLAGS) $(OBJ) -o $@ $(LD_FLAGS)
 
--include $(wildcard toolchains/*.mk)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(INCLUDE) $(OBJ_DIR) 
+	$(CXX) $(CXX_FLAGS) -c $< -o $@
 
+$(BUILD_DIR):
+	mkdir -p $@
+
+$(OBJ_DIR):
+	mkdir -p $@
 
 clean:
 	rm -rf $(BUILD_DIR)
+
+test: all
+	xwm -e ./$(TARGET)
+
+.PHONY: all clean test

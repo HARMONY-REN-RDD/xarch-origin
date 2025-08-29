@@ -1,6 +1,7 @@
-ENTITIES_DIR := entities
-ARCHITECTURES_DIR := architectures
-TESTBENCHES_DIR := testbenches
+SRC_DIR := src
+ENTITIES_DIR := ${SRC_DIR}/entities
+ARCHITECTURES_DIR := ${SRC_DIR}/architectures
+TESTBENCHES_DIR := tb
 BUILD_DIR := build
 
 ENTITIES := $(shell find $(ENTITIES_DIR) -type f -name '*.vhdl')
@@ -22,7 +23,6 @@ analyze: $(BUILD_DIR)
 test: analyze
 	@mkdir -p build
 	@for tb in $(TB_ENTITIES); do \
-		echo "=== $$tb ==="; \
 		$(GHDL) -r $(GHDL_FLAGS) $$tb; \
 	done | tee build/sim.log
 	@errors=$$(grep -i "error" build/sim.log); \
